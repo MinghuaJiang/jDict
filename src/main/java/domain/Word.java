@@ -14,15 +14,17 @@ public class Word implements Comparable<Word>, Serializable
 	private static final long serialVersionUID = -6735300174208362856L;
 	private String english;
     private List<String> chinese;
+    private String relative;
     private PeriodState state;
     private String addingDay;
     private List<String> remoteMeaning;
 
-    public Word(String english, List<String> chinese)
+    public Word(String english, List<String> chinese, String relative)
     {
         this.english = english;
         this.chinese = chinese;
         this.state = PeriodState.ONE_DAY;
+        this.relative = relative;
         //this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
     }
 
@@ -107,5 +109,13 @@ public class Word implements Comparable<Word>, Serializable
 
     public String toString(){
     	return this.getEnglish();
+    }
+
+    public String getRelative() {
+        return relative;
+    }
+
+    public void setRelative(String relative){
+        this.relative = relative;
     }
 }

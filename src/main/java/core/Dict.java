@@ -71,6 +71,7 @@ public class Dict implements Serializable
         if(this.words.containsKey(word)){
             Word key = this.words.get(word);
             key.setChinese(word.getChinese());
+            key.setRelative(word.getRelative());
             this.words.put(key, key);
         }else{
             this.words.put(word, word);

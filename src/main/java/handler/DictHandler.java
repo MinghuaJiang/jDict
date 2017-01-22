@@ -22,6 +22,7 @@ public class DictHandler {
 			Row row = sheet.getRow(i);
 			Cell englishCell = row.getCell(0);
 			Cell chineseCell = row.getCell(1);
+			Cell relativeCell = row.getCell(2);
 			String english = englishCell.getStringCellValue();
 			String chinese = chineseCell
 					.getStringCellValue();
@@ -29,8 +30,12 @@ public class DictHandler {
 			if(chinese != null){
 				 chineseList = Arrays.asList(chinese.split("\n"));
 			}
-			
-			Word word = new Word(english, chineseList);
+			String relative = null;
+			if(relativeCell != null){
+				relative = relativeCell.getStringCellValue();
+			}
+
+			Word word = new Word(english, chineseList, relative);
 			words.add(word);
 		}
 		return words;

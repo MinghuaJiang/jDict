@@ -10,74 +10,76 @@ import domain.Word;
 
 public class ExplainPanel extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2586740708158131160L;
-	private JTextArea area;
-	
-	private static ExplainPanel panel = new ExplainPanel();
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2586740708158131160L;
+    private JTextArea area;
 
-	public static ExplainPanel getInstance() {
-		return panel;
-	}
-	private JScrollPane pane;
+    private static ExplainPanel panel = new ExplainPanel();
 
-	private ExplainPanel() {
-		this.setSize(808, 600);
-		this.setLayout(null);	
-		area = new JTextArea();		
-		pane = new JScrollPane(area);
-		pane.setSize(808, 568);
-		pane.setLocation(0, 0);
-		area.setLineWrap(true);
-		area.setWrapStyleWord(true);
-		area.setEditable(false);
-		add(pane);
-		
-	}
+    public static ExplainPanel getInstance() {
+        return panel;
+    }
 
-	public void updateStatus(String message){
-		area.setText(message);
-		//area.setCaretPosition(0);
-	}
-	
-	public void updateArea(Word word) {
-		if(word == null){
-			area.setText("");
-			area.setCaretPosition(0);
-		}
-		else {
-			area.setText(this.getExplain(word));
-			area.setCaretPosition(0);
-		}
-	}
+    private JScrollPane pane;
 
-	private String getExplain(Word word) {
-		StringBuilder sb = new StringBuilder();
-		List<String> localExplains = getLocalExplain(word);
-		if (localExplains != null) {
-			for (String explain : localExplains) {
-				sb.append(explain).append("\n");
-			}
-		}
-		sb.append("\n");
-		sb.append("网络解释:").append("\n");
-		List<String> remoteExplains = getRemoteExplain(word);
-		if (remoteExplains != null) {
-			for (String remoteExplain : remoteExplains) {
-				sb.append(remoteExplain).append("\n");
-			}
-		}
-		return sb.toString();
+    private ExplainPanel() {
+        this.setSize(808, 600);
+        this.setLayout(null);
+        area = new JTextArea();
+        pane = new JScrollPane(area);
+        pane.setSize(808, 568);
+        pane.setLocation(0, 0);
+        area.setLineWrap(true);
+        area.setWrapStyleWord(true);
+        area.setEditable(false);
+        add(pane);
 
-	}
+    }
 
-	private List<String> getLocalExplain(Word word) {
-		return word.getChinese();
-	}
+    public void updateStatus(String message) {
+        area.setText(message);
+        //area.setCaretPosition(0);
+    }
 
-	private List<String> getRemoteExplain(Word word) {
-		return word.getRemoteMeaning();
-	}
+    public void updateArea(Word word) {
+        if (word == null) {
+            area.setText("");
+            area.setCaretPosition(0);
+        } else {
+            area.setText("\n    " + word.getEnglish() + "      " + (word.getRelative() == null ? "" : "[" +
+                    word.getRelative() +"]") + "\n\n" + this.getExplain(word));
+            area.setCaretPosition(0);
+        }
+    }
+
+    private String getExplain(Word word) {
+        StringBuilder sb = new StringBuilder();
+        List<String> localExplains = getLocalExplain(word);
+        if (localExplains != null) {
+            for (String explain : localExplains) {
+                sb.append("    " + explain).append("\n");
+            }
+        }
+        sb.append("\n");
+        sb.append("    网络解释:").append("\n");
+        sb.append("    ----------").append("\n");
+        List<String> remoteExplains = getRemoteExplain(word);
+        if (remoteExplains != null) {
+            for (String remoteExplain : remoteExplains) {
+                sb.append("    " + remoteExplain).append("\n");
+            }
+        }
+        return sb.toString();
+
+    }
+
+    private List<String> getLocalExplain(Word word) {
+        return word.getChinese();
+    }
+
+    private List<String> getRemoteExplain(Word word) {
+        return word.getRemoteMeaning();
+    }
 }
