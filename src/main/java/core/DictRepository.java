@@ -7,10 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import domain.Word;
 
@@ -55,15 +52,14 @@ public class DictRepository
         return repository;
     }
 
-    public boolean addDict(String name, List<Word> words)
+    public void addDict(String name, List<Word> words)
     {
         Dict dict = newWordsMap.get(name);
         if(dict == null){
-        	dict = new Dict(name, words);
+        	dict = new Dict(name);
         	newWordsMap.put(name, dict);
-        	return true;
         }
-        return false;
+        dict.addWords(words);
     }
 
     public Dict getDict(String name)

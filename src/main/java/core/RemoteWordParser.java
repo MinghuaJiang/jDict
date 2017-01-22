@@ -34,7 +34,7 @@ public class RemoteWordParser
         return parser;
     }
 
-    private String siteUrl = "http://dict.cn/";
+    private String siteUrl = "http://www.youdao.com/w/eng/";
 
     public List<String> getChineseExplain(String word) throws Exception
     {
@@ -88,12 +88,13 @@ public class RemoteWordParser
 
     public List<String> parseHtmlContent(String html) throws Exception
     {
-        if (html.contains("dict-basic-ul"))
+        if (html.contains("trans-container"))
         {
-            int firstIndex = html.indexOf("<ul class=\"dict-basic-ul\">");
+
+            int firstIndex = html.indexOf("<div class=\"trans-container\">");
+
             html = html.substring(firstIndex,
-                    html.indexOf("</ul>", firstIndex) + 5);
-            html =  html.replaceAll("<口>", "[口]");
+                    html.indexOf("</div>", firstIndex) + 6);
         }
         else
         {
@@ -112,24 +113,7 @@ public class RemoteWordParser
 			{
 			    Node item = li.item(i);
 
-			    StringBuilder sb = new StringBuilder();
-			    NodeList desc = item.getChildNodes();
-			    for (int j = 0; j < desc.getLength(); j++)
-			    {
-			        if (desc.item(j).getNodeName().equalsIgnoreCase("span"))
-			        {
-			            if(desc.item(j).hasChildNodes()){
-			            	sb.append(desc.item(j).getFirstChild().getNodeValue());
-			            }
-			        }
-			        if (desc.item(j).getNodeName().equalsIgnoreCase("strong"))
-			        {
-			        	if(desc.item(j).hasChildNodes()){
-			        		sb.append(desc.item(j).getFirstChild().getNodeValue());
-			        	}
-			        }
-			    }
-			    list.add(sb.toString());
+			    list.add(item.getFirstChild().getNodeValue());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

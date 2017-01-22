@@ -11,8 +11,6 @@ import java.io.ObjectOutputStream;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import core.Dict;
-import core.DictRepository;
 import core.WordRepository;
 
 public class StatusPanel extends JPanel {

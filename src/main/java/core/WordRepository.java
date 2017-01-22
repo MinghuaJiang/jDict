@@ -37,7 +37,7 @@ public class WordRepository {
 	public void init(String dictName) {
 		this.dictName = dictName;
 		File allWordsFile = new File(dictName + "_allWords.dat");
-		File newWordsFile = new File(dictName + " _newWords.dat");
+		File newWordsFile = new File(dictName + "_newWords.dat");
 		File reviewWordsFile = new File(dictName + "_reviewWords.dat");
 
 		try {

@@ -44,10 +44,9 @@ public class EditorPanel extends JPanel {
 		String dictName = statusPanel.getDictName();
 		if (!dictName.equals("")) {
 			Dict dictionary = DictRepository.getInstance().getDict(dictName);
-			if (dictionary.isComplete() && !dictionary.isNotified()) {
-				JOptionPane.showMessageDialog(null, "恭喜你,当前生词表已完成所有单词的学习和复习任务",
+			if (dictionary.isComplete()) {
+				JOptionPane.showMessageDialog(null, "恭喜你,当前已完成所有单词的学习和复习任务,请添加更多生词",
 						"提示", JOptionPane.INFORMATION_MESSAGE);
-				dictionary.setNotified(true);
 			}
 		}
 

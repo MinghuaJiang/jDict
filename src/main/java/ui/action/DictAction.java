@@ -45,7 +45,7 @@ public class DictAction implements ActionListener {
 							- dict.getCurrentCount();
 					if (maxLearningCount == 0) {
 						JOptionPane.showMessageDialog(null,
-								"该生词表生词已学完,完成复习后即完成该生词表的学习", "提示",
+								"当前生词已学完,完成复习后即完成该生词表的学习,请添加更多生词", "提示",
 								JOptionPane.WARNING_MESSAGE);
 					}else{
 						boolean isValid = false;

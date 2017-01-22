@@ -50,16 +50,13 @@ public class ImportAction implements ActionListener {
 			if (result == JFileChooser.APPROVE_OPTION) {
 				File file = chooser.getSelectedFile();
 				List<Word> words = handler.parse(file.getAbsolutePath());
-				boolean flag = DictRepository.getInstance().addDict(file.getName(), words);
-				if (!flag) {
-					JOptionPane.showMessageDialog(null, "该生词表已经导入", "提示",
-							JOptionPane.WARNING_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(null, "生词表成功导入,该生词表包含"
-							+ words.size() + "个生词","提示",
-							JOptionPane.INFORMATION_MESSAGE);
+				DictRepository.getInstance().addDict(file.getName(), words);
+				JOptionPane.showMessageDialog(null, "生词表成功导入,该生词表包含"
+								+ words.size() + "个生词","提示",
+						JOptionPane.INFORMATION_MESSAGE);
+				if(StatusPanel.getInstance().getDictName() == null
+						|| !file.getName().equals(StatusPanel.getInstance().getDictName()))
 					StatusPanel.getInstance().updateDictName(file.getName());
-				}
 			}
 		} catch (HeadlessException e) {
 			// TODO Auto-generated catch block

@@ -18,12 +18,12 @@ public class Word implements Comparable<Word>, Serializable
     private String addingDay;
     private List<String> remoteMeaning;
 
-    public Word(String english, List<String> chinese) throws Exception
+    public Word(String english, List<String> chinese)
     {
         this.english = english;
         this.chinese = chinese;
         this.state = PeriodState.ONE_DAY;
-        this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
+        //this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
     }
 
     public String getEnglish()
@@ -47,8 +47,14 @@ public class Word implements Comparable<Word>, Serializable
         this.chinese = chinese;
     }
 
-    public List<String> getRemoteMeaning()
-    {
+    public List<String> getRemoteMeaning(){
+        try {
+            if(remoteMeaning == null){
+                remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(this.english);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return remoteMeaning;
     }
 
@@ -81,6 +87,22 @@ public class Word implements Comparable<Word>, Serializable
     {
         // TODO Auto-generated method stub
         return this.getEnglish().compareTo(o.getEnglish());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Word word = (Word) o;
+
+        return english != null ? english.equals(word.english) : word.english == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return english != null ? english.hashCode() : 0;
     }
 
     public String toString(){

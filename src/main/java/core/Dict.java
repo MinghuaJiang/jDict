@@ -1,9 +1,7 @@
 package core;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import util.DateUtilities;
 import domain.Word;
@@ -16,14 +14,13 @@ public class Dict implements Serializable
 	private static final long serialVersionUID = 2814728976699017362L;
 	private String name;
     private int currentCount;
-    private List<Word> words;
+    private LinkedHashMap<Word, Word> words;
     private Set<Word> completeSet;
-    private boolean isComplete;
-    private String completeDay;
-    private boolean isNotified;
-    public Dict(String name, List<Word> words)
+
+    public Dict(String name)
     {
-        this.words = words;
+        this.words = new LinkedHashMap<Word, Word>();
+        this.completeSet = new HashSet<Word>();
     }
 
     public int getCurrentCount()
@@ -36,14 +33,16 @@ public class Dict implements Serializable
         this.currentCount += count;
     }
 
-    public List<Word> getWords()
+    public Set<Word> getWords()
     {
-        return words;
+        return words.keySet();
     }
 
-    public void setWords(List<Word> words)
+    public void addWords(List<Word> words)
     {
-        this.words = words;
+        for(Word word: words){
+            addWord(word);
+        }
     }
 
     public String getName()
@@ -58,31 +57,23 @@ public class Dict implements Serializable
     
 	public void addToCompleteSet(Word word){
 		completeSet.add(word);
-		if(completeSet.size() == words.size()){
-			isComplete = true;
-			Date today = new Date();
-			completeDay = DateUtilities.YYYYMMDD(today); 
-		}
 	}
 	
 	public boolean isComplete(){
-		Date today = new Date();
-		String day = DateUtilities.YYYYMMDD(today);
-		if(isComplete){
-			if((Integer.parseInt(day) - Integer.parseInt(completeDay)) > 0){
-				return true;
-			}
-			return false;
-		}
-		return false;
+		return completeSet.size() == words.size();
 	}
 
-	public boolean isNotified() {
-		return isNotified;
-	}
+	public boolean containsWord(Word word){
+	    return this.words.containsKey(word);
+    }
 
-	public void setNotified(boolean isNotified) {
-		this.isNotified = isNotified;
-	}
-	
+    public void addWord(Word word){
+        if(this.words.containsKey(word)){
+            Word key = this.words.get(word);
+            key.setChinese(word.getChinese());
+            this.words.put(key, key);
+        }else{
+            this.words.put(word, word);
+        }
+    }
 }

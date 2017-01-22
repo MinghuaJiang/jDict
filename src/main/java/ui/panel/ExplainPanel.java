@@ -43,14 +43,19 @@ public class ExplainPanel extends JPanel {
 	}
 	
 	public void updateArea(Word word) {
-		area.setText(word.getEnglish() + "\n" + this.getExplain(word));
-		area.setCaretPosition(0);
+		if(word == null){
+			area.setText("");
+			area.setCaretPosition(0);
+		}
+		else {
+			area.setText(this.getExplain(word));
+			area.setCaretPosition(0);
+		}
 	}
 
 	private String getExplain(Word word) {
 		StringBuilder sb = new StringBuilder();
 		List<String> localExplains = getLocalExplain(word);
-		sb.append("生词表解释:").append("\n");
 		if (localExplains != null) {
 			for (String explain : localExplains) {
 				sb.append(explain).append("\n");

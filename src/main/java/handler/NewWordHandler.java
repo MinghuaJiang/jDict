@@ -1,5 +1,6 @@
 package handler;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class NewWordHandler {
 	    {
 	        Dict dict = DictRepository.getInstance().getDict(dictName);
 	        int currentCount = dict.getCurrentCount();
-	        List<Word> words = dict.getWords().subList(currentCount,
+	        List<Word> words = new ArrayList<>(dict.getWords()).subList(currentCount,
 	                currentCount + learningCount);
 	        WordRepository.getInstance().addNewWords(words);
 	        dict.addCurrentCount(learningCount);
