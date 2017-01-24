@@ -25,7 +25,11 @@ public class Word implements Comparable<Word>, Serializable
         this.chinese = chinese;
         this.state = PeriodState.ONE_DAY;
         this.relative = relative;
-        //this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
+        try {
+            this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getEnglish()
@@ -50,13 +54,6 @@ public class Word implements Comparable<Word>, Serializable
     }
 
     public List<String> getRemoteMeaning(){
-        try {
-            if(remoteMeaning == null){
-                remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(this.english);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return remoteMeaning;
     }
 

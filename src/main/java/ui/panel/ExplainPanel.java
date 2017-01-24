@@ -48,8 +48,8 @@ public class ExplainPanel extends JPanel {
             area.setText("");
             area.setCaretPosition(0);
         } else {
-            area.setText("\n    " + word.getEnglish() + "      " + (word.getRelative() == null ? "" : "[" +
-                    word.getRelative() +"]") + "\n\n" + this.getExplain(word));
+            area.setText("\n    " + word.getEnglish() + "    " + (word.getRelative() == null ? "" :
+                    word.getRelative()) + "\n\n" + this.getExplain(word));
             area.setCaretPosition(0);
         }
     }
@@ -63,7 +63,6 @@ public class ExplainPanel extends JPanel {
             }
         }
         sb.append("\n");
-        sb.append("    网络解释:").append("\n");
         sb.append("    ----------").append("\n");
         List<String> remoteExplains = getRemoteExplain(word);
         if (remoteExplains != null) {
