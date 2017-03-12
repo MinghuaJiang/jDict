@@ -24,7 +24,7 @@ public class AboutAction implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == aboutItem){
-			JOptionPane.showMessageDialog(null, "作者： 蒋明华\n版本： 1.0","关于",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "作者： 蒋明华\n版本： 1.2","关于",JOptionPane.INFORMATION_MESSAGE);
 		}
 		if(e.getSource() == helpItem){
 			JOptionPane.showMessageDialog(null,message,"使用方式",JOptionPane.INFORMATION_MESSAGE);

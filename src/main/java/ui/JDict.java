@@ -8,7 +8,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import ui.menu.CustomMenuBar;
+import ui.menu.DictMenu;
+import ui.menu.FileMenu;
 import ui.panel.EditorPanel;
+import ui.panel.SearchPanel;
 import ui.panel.StatusPanel;
 import util.ResourceReader;
 import core.DictRepository;
@@ -47,8 +50,16 @@ public class JDict extends JFrame{
 			setVisible(true);
 			setJMenuBar(CustomMenuBar.getInstance());
 			// pack();
+		    this.setLayout(null);
 			EditorPanel panel = EditorPanel.getInstance();
 			add(panel);
+			panel.setLocation(0,0);
+			panel.setSize(1000, 640);
+			SearchPanel searchPanel = SearchPanel.getInstance();
+			add(searchPanel);
+			searchPanel.setLocation(0,0);
+			searchPanel.setSize(1000, 640);
+			panel.setVisible(false);
 			setSize(1000, 670);
 			
 			setLocationRelativeTo(null);

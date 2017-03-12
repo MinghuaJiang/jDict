@@ -22,27 +22,27 @@ public class StatusPanel extends JPanel {
 		setLayout(null);
 		add(dictLabel);
 		dictLabel.setLocation(25, 0);
-		dictLabel.setSize(70, 40);
+		dictLabel.setSize(80, 40);
 		add(dictData);
-		dictData.setLocation(100, 0);
+		dictData.setLocation(110, 0);
 		dictData.setSize(150, 40);
 		add(allLabel);
-		allLabel.setLocation(350,0);
-		allLabel.setSize(85,40);
+		allLabel.setLocation(300,0);
+		allLabel.setSize(110,40);
 		add(allData);
-		allData.setLocation(445,0);
+		allData.setLocation(415,0);
 		allData.setSize(50, 40);
 		add(newLabel);
-		newLabel.setLocation(570, 0);
-		newLabel.setSize(85, 40);
+		newLabel.setLocation(540, 0);
+		newLabel.setSize(120, 40);
 		add(newData);
 		newData.setLocation(660,0);
 		newData.setSize(50, 40);
 		add(reviewLabel);
 		reviewLabel.setLocation(780, 0);
-		reviewLabel.setSize(120,40);
+		reviewLabel.setSize(150,40);
 		add(reviewData);
-		reviewData.setLocation(910, 0);
+		reviewData.setLocation(940, 0);
 		reviewData.setSize(50,40);
 	}
 

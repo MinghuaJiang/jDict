@@ -37,15 +37,14 @@ public class EditorPanel extends JPanel {
 		wordPanel.setLocation(0, 50);
 		add(explainPanel);
 		explainPanel.setLocation(wordPanel.getWidth(), 50);
-		notifyCompletion();
 	}
 
-	private void notifyCompletion() {
+	public void notifyCompletion() {
 		String dictName = statusPanel.getDictName();
-		if (!dictName.equals("")) {
+		if (!dictName.isEmpty()) {
 			Dict dictionary = DictRepository.getInstance().getDict(dictName);
 			if (dictionary.isComplete()) {
-				JOptionPane.showMessageDialog(null, "恭喜你,当前已完成所有单词的学习和复习任务,请添加更多生词",
+				JOptionPane.showMessageDialog(null, "恭喜你,当前生词库已背完,请添加更多生词或者更换生词库",
 						"提示", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}

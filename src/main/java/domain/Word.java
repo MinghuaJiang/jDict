@@ -18,15 +18,25 @@ public class Word implements Comparable<Word>, Serializable
     private PeriodState state;
     private String addingDay;
     private List<String> remoteMeaning;
+    private boolean isEnabled = true;
 
     public Word(String english, List<String> chinese, String relative)
+    {
+        this(english,chinese,relative, null);
+    }
+
+    public Word(String english, List<String> chinese, String relative, List<String> remoteMeaning)
     {
         this.english = english;
         this.chinese = chinese;
         this.state = PeriodState.ONE_DAY;
         this.relative = relative;
         try {
-            this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
+            if(remoteMeaning == null) {
+                this.remoteMeaning = RemoteWordParser.getInstance().getChineseExplain(english);
+            }else{
+                this.remoteMeaning = remoteMeaning;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,5 +124,13 @@ public class Word implements Comparable<Word>, Serializable
 
     public void setRelative(String relative){
         this.relative = relative;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

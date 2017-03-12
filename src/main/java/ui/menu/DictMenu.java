@@ -63,4 +63,16 @@ public class DictMenu extends JMenu {
 		this.reviewWords = reviewWords;
 	}
 
+	public void enableMenuItems(){
+		allWords.setEnabled(true);
+		newWords.setEnabled(true);
+		reviewWords.setEnabled(true);
+	}
+
+	public void disableMenuItems(){
+		allWords.setEnabled(false);
+		newWords.setEnabled(false);
+		reviewWords.setEnabled(false);
+	}
+
 }

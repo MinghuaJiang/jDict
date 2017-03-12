@@ -26,4 +26,14 @@ public class FileMenu extends JMenu {
 	public static FileMenu getInstance() {
 		return fileMenu;
 	}
+
+	public void disableMenuItems(){
+		importMenu.setEnabled(true);
+		exportMenu.setEnabled(false);
+	}
+
+	public void enableMenuItems(){
+		importMenu.setEnabled(false);
+		exportMenu.setEnabled(true);
+	}
 }

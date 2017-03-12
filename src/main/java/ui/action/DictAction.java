@@ -36,8 +36,8 @@ public class DictAction implements ActionListener {
 		try {
 			if (e.getSource().equals(DictMenu.getInstance().getNewWords())) {
 				if (WordRepository.getInstance().isAddedNewWords()) {
-					WordPanel.getInstance().updateList(
-							WordRepository.getInstance().getNewWords());
+					WordPanel.getInstance().updateTree(
+							WordRepository.getInstance().getNewWords(), false);
 				} else {
 					Dict dict = DictRepository.getInstance().getDict(
 							WordRepository.getInstance().getCurrentDictName());
@@ -61,7 +61,7 @@ public class DictAction implements ActionListener {
 										Set<Word> words = newWordHandler.handle(
 												WordRepository.getInstance().getCurrentDictName(),
 												learningCount);
-										WordPanel.getInstance().updateList(words);
+										WordPanel.getInstance().updateTree(words, false);
 										StatusPanel.getInstance()
 												.updateNewWordCount(
 														WordRepository
@@ -91,10 +91,10 @@ public class DictAction implements ActionListener {
 			} else if (e.getSource().equals(
 					DictMenu.getInstance().getReviewWords())) {
 				Set<Word> words = reviewedWordHandler.handle();
-				WordPanel.getInstance().updateList(words);
+				WordPanel.getInstance().updateTree(words, false);
 			} else {
 				Set<Word> words = allWordHandler.handle();
-				WordPanel.getInstance().updateList(words);
+				WordPanel.getInstance().updateTree(words, true);
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
