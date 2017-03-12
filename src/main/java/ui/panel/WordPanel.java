@@ -65,7 +65,6 @@ public class WordPanel extends JPanel {
                     if (node == null) return;
                     Object word = (Object)node.getUserObject();
                     if(word instanceof Word) {
-                        System.out.println(((Word) word).isEnabled());
                         ExplainPanel.getInstance().updateArea((Word)word);
                     }
                 }
