@@ -18,6 +18,7 @@ Change the word order in the list to be FIFO.
 
 1.3
 Support search by clicking enter.
+
 Get more information from remote dictionary.
 
 2.0
