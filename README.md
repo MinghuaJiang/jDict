@@ -16,6 +16,10 @@ Add search and save word interface and function.
 
 Change the word order in the list to be FIFO.
 
+1.3
+Support search by clicking enter.
+Get more information from remote dictionary.
+
 2.0
 Index youdao dictionary to support local search.
 
