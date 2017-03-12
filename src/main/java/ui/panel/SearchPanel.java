@@ -50,6 +50,10 @@ public class SearchPanel extends JPanel {
             }
 
             public void keyReleased(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    searchAction();
+                    return;
+                }
                 if (field.getText() == null || field.getText().isEmpty()) {
                     field.setText("在此输入要查询的英语单词");
                     field.setForeground(Color.LIGHT_GRAY);
@@ -63,20 +67,7 @@ public class SearchPanel extends JPanel {
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (field.getText().equals("在此输入要查询的英语单词")) {
-                    return;
-                }
-                RemoteWordParser parser = RemoteWordParser.getInstance();
-                try {
-                    List<String> chinese = parser.getChineseExplain(field.getText());
-                    StringBuilder sb = new StringBuilder();
-                    for (String str : chinese) {
-                        sb.append(str).append("\n");
-                    }
-                    editorPane.setText(sb.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+               searchAction();
             }
         });
 
@@ -96,9 +87,15 @@ public class SearchPanel extends JPanel {
                         JOptionPane.showMessageDialog(null, "成功创建生词库:" + input, "提示", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
-                String[] text = editorPane.getText().split("\n");
-                List<String> chinese = Arrays.asList(text);
-                Word word = new Word(field.getText(), chinese, null, chinese);
+                String[] text = editorPane.getText().split("自定义解释\n----------------------------------------------\n");
+                List<String> remote = Arrays.asList(text[0].replace("\n\n","").split("\n"));
+                String[] temp = text[1].split("记忆相关词\n----------------------------------------------\n");
+                String relative = null;
+                if(temp.length > 1){
+                    relative = temp[1];
+                }
+                Word word = new Word(field.getText(), Arrays.asList(temp[0].replace("\n\n","").split("\n")), relative, remote);
+
                 currentDict = WordRepository.getInstance().getCurrentDictName();
                 String message = "成功保存生词 " + field.getText() + " 到生词库:" + currentDict;
                 JOptionPane.showMessageDialog(null,message, "提示", JOptionPane.INFORMATION_MESSAGE);
@@ -112,7 +109,27 @@ public class SearchPanel extends JPanel {
         add(buttonPanel, BorderLayout.NORTH);
         editorPane = new JEditorPane();
         add(new JScrollPane(editorPane), BorderLayout.CENTER);
+        editorPane.setText("自定义解释\n----------------------------------------------\n" +
+                "\n\n记忆相关词\n----------------------------------------------\n");
+    }
 
+    private void searchAction(){
+        if (field.getText().equals("在此输入要查询的英语单词")) {
+            return;
+        }
+        RemoteWordParser parser = RemoteWordParser.getInstance();
+        try {
+            List<String> chinese = parser.getChineseExplain(field.getText());
+            StringBuilder sb = new StringBuilder();
+            for (String str : chinese) {
+                sb.append(str).append("\n");
+            }
+            sb.append("\n\n自定义解释\n----------------------------------------------\n");
+            sb.append("\n\n相关词\n----------------------------------------------\n");
+            editorPane.setText(sb.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
