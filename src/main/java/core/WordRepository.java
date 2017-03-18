@@ -37,7 +37,7 @@ public class WordRepository {
 
 		try {
 			if (!allWordsFile.exists()) {
-				allWords = new LinkedHashSet<Word>();
+				allWords = new TreeSet<Word>();
 			} else {
 				ObjectInputStream allWordsStream = new ObjectInputStream(
 						new FileInputStream(allWordsFile));
@@ -87,7 +87,7 @@ public class WordRepository {
 		word.setAddingDay(day);
 		Set<Word> newWordSet = newWordsMap.get(day);
 		if (newWordSet == null) {
-			newWordSet = new LinkedHashSet<Word>();
+			newWordSet = new TreeSet<Word>();
 			newWordsMap.put(day, newWordSet);
 		}
 		newWordSet.add(word);
@@ -95,7 +95,7 @@ public class WordRepository {
 		String reviewDay = state.calculateTargetDay(day);
 		Set<Word> reviewWordSet = reviewWordsMap.get(reviewDay);
 		if (reviewWordSet == null) {
-			reviewWordSet = new LinkedHashSet<Word>();
+			reviewWordSet = new TreeSet<Word>();
 			reviewWordsMap.put(reviewDay, reviewWordSet);
 		}
 		reviewWordSet.add(word);
@@ -116,7 +116,7 @@ public class WordRepository {
 		String day = DateUtilities.YYYYMMDD(today);
 		Set<Word> words = newWordsMap.get(day);
 		if (words == null) {
-			return new LinkedHashSet<Word>();
+			return new TreeSet<Word>();
 		}
 		return words;
 	}
@@ -141,7 +141,7 @@ public class WordRepository {
 							word.getAddingDay());
 					Set<Word> reviewWordSet = reviewWordsMap.get(newDay);
 					if (reviewWordSet == null) {
-						reviewWordSet = new LinkedHashSet<Word>();
+						reviewWordSet = new TreeSet<Word>();
 						reviewWordsMap.put(newDay, reviewWordSet);
 					}
 					reviewWordSet.add(word);
@@ -149,7 +149,7 @@ public class WordRepository {
 			}
 		}
 		if (words == null) {
-			return new LinkedHashSet<Word>();
+			return new TreeSet<Word>();
 		}
 		return words;
 	}

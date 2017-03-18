@@ -123,6 +123,9 @@ public class WordPanel extends JPanel {
                     this.setForeground(Color.LIGHT_GRAY);
                 }
             }
+            this.setLeafIcon(null);
+            this.setClosedIcon(null);
+            this.setOpenIcon(null);
             return this;
         }
     }
