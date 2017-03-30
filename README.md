@@ -27,4 +27,4 @@ Index youdao dictionary to support local search.
 Add recommend function when search.
 
 2.1
-Add Twilio API to automatilly send reminder to cell phone if there is review words pending today.
+Add Twilio API to automatically send reminder to cell phone if there is review words pending today.
